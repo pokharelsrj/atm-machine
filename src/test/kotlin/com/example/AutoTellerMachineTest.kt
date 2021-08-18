@@ -46,4 +46,16 @@ class AutoTellerMachineTest : StringSpec({
 
         verify { fakePrinter.print("Successfully Withdrawn 100") }
     }
+
+    "should throw exception if banking service throws an exception using mock" {
+        val fakePrinter = mockk<Printer>()
+        val fakeBankingService = mockk<BankingService>()
+        every { fakeBankingService.withdraw(100) } returns Unit
+
+        val exception= shouldThrowAny {
+            AutoTellerMachine(fakePrinter,fakeBankingService).withdraw(100)
+        }
+
+        verify { fakePrinter.print("Error Withdrawin") }
+    }
 })
