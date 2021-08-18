@@ -56,6 +56,6 @@ class AutoTellerMachineTest : StringSpec({
             AutoTellerMachine(fakePrinter,fakeBankingService).withdraw(100)
         }
 
-        verify { fakePrinter.print("Error Withdrawin") }
+        verify { fakePrinter.print("Error Withdrawing") }
     }
 })
